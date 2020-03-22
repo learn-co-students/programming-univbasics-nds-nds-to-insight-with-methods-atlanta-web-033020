@@ -1,17 +1,27 @@
-$LOAD_PATH.unshift(File.dirname(__FILE__))
+ $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'directors_database'
-
-# Find a way to accumulate the :worldwide_grosses and return that Integer
-# using director_data as input
+require 'pry'
 def gross_for_director(director_data)
-
+  row_index = 0
+  dir_money = 0
+  movies = director_data[:movies]
+   while row_index < movies.length do
+     dir_money += movies[row_index][:worldwide_gross]
+     row_index += 1
+   end
+   dir_money
 end
 
-# Write a method that, given an NDS creates a new Hash
-# The return value should be like:
-#
-# { directorOne => allTheMoneyTheyMade, ... }
+
+
 def directors_totals(nds)
-  result = {}
-  nil
+ director_index = 0 
+ total = {}
+   while director_index < nds.length do 
+     name =  nds[director_index][:name]
+     total[name] = gross_for_director(nds[director_index])
+    director_index += 1
+   #binding.pry 
+end  
+total
 end
